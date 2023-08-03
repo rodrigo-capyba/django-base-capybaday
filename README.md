@@ -8,3 +8,5 @@
     - `urls.py`: arquivo de urls do projeto. É preferível incluir apenas as urls das outras apps, deixando a configuração específica de cada módulo em seu próprio arquivo urls.py.
     - `wsgi.py`: arquivo wsgi padrão do Django para deploy.
 - `requirements`: contém as dependências do projeto, separadas por ambiente (local, production, etc.).
+- `env.example`: arquivo env de exemplo para iniciar o projeto. Deve ser copiado para um arquivo `.env` (não versionado).
+- `docker-compose.yml` e `Dockerfile`: arquivos de configuração Docker.
