@@ -1,3 +1,7 @@
+# Django Base CapybaDay 23 [![build](https://github.com/rodrigo-capyba/django-base-capybaday/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/rodrigo-capyba/django-base-capybaday/actions/workflows/main.yml)
+
+Projeto Django base para apresentenção no Capyba Day 2023
+
 ## Como rodar
 
 Se for a primeira vez:
@@ -36,6 +40,16 @@ make seed
 - `env.example`: arquivo env de exemplo para iniciar o projeto. Deve ser copiado para um arquivo `.env` (não versionado).
 - `docker-compose.yml` e `Dockerfile`: arquivos de configuração Docker.
 - `Makefile`: contém comandos úteis, como por exemplo entrar num container ou criar uma app.
+
+## Testes unitários
+
+Utilizamos a biblioteca **pytest** para rodar testes unitários. Seu arquivo de configuração é *pytest.ini*.
+
+- Para rodas os testes, usar o comando `make test`.
+
+Como por padrão os testes reutilizam o banco de dados gerado, caso tenha novas migrações é necessário re-criar o banco.
+
+- Para re-criar o banco, usar o comando `make test_create_db`.
 
 ## Comandos úteis
 

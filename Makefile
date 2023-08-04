@@ -36,3 +36,9 @@ seed:
 
 shell:
 	bash scripts/docker-run.sh python manage.py shell
+
+test:
+	bash scripts/docker-run.sh pytest
+
+test_create_db:
+	bash scripts/docker-run.sh pytest --create-db
