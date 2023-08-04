@@ -1,0 +1,6 @@
+from faker import Faker
+from model_bakery.recipe import Recipe
+
+fake = Faker()
+
+# Create your recipes here.
