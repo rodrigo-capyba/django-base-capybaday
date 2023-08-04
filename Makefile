@@ -34,6 +34,9 @@ migrate:
 seed:
 	bash scripts/docker-run.sh python manage.py runscript seed
 
+reset_schema:
+	bash scripts/docker-run.sh python manage.py reset_schema
+
 shell:
 	bash scripts/docker-run.sh python manage.py shell
 
@@ -42,3 +45,5 @@ test:
 
 test_create_db:
 	bash scripts/docker-run.sh pytest --create-db
+
+total_reset: reset_schema migrate seed
