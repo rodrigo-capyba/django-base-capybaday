@@ -1,66 +1,64 @@
-# Django Base CapybaDay 23 [![build](https://github.com/rodrigo-capyba/django-base-capybaday/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/rodrigo-capyba/django-base-capybaday/actions/workflows/main.yml)
+# Django Base Capyba Day 2023 [![build](https://github.com/rodrigo-capyba/django-base-capybaday/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/rodrigo-capyba/django-base-capybaday/actions/workflows/main.yml)
 
-Projeto Django base para apresentenção no Capyba Day 2023
+O objetivo deste projeto é fornecer uma base de código Django que servirá como passo inicial para novos projetos de backend em que se opte pela tecnologia Python/Django. Os princípios que devem guiar o projeto são:
 
-## Como rodar
+1. Fornecer o máximo possível de bibliotecas e funcionalidades básicas de toda aplicação web backend. 
+2. Fazer o mínimo possível de suposições sobre a aplicação, mantendo-se sempre generalista.
+3. Encorajar um modelo de arquitetura e estilo de código que seja adaptável, extensível e siga as boas práticas de padrões de projeto.
+4. Preparar uma mecânica de geração de código que possibilite ao desenvolvedor instanciar o Django Base e escolher as funcionalidades que ele deseja para iniciar um novo projeto.
 
-Se for a primeira vez:
+## Como começar um projeto
+
+1. Instalar o **cookiecutter**, seguir as instruções de instalação na [documentação](https://cookiecutter.readthedocs.io/en/1.7.2/installation.html):
+
+2. Gerar o projeto a partir do template Django Base (adicionar `--checkout nome-da-branch` para usar branch específica):
 ```bash
-make setup_install
+cookiecutter git@github.com:rodrigo-capyba/django-base-capybaday.git
 ```
 
-Depois, apenas:
-```bash
-make up
-```
+3. Configurar as variáveis pedidas pelo cookiecutter conforme desejado para o projeto (*project_name*, *project_slug*, etc.). Cada variável está descrita abaixo:
 
-### Opcional
+- **project_name**: Nome do projeto. Aparecerá, por exemplo, no README e na documentação.
+- **project_slug**: Nome "programático" do projeto. Será o nome da pasta raiz, por exemplo.
+- **project_short_description**: Descrição sucinta do projeto. Aparecerá, por exemplo, no README e na documentação.
+- **repository_owner**: Nome de usuário criador do repositório em que o projeto será versionado.
+- **repository_name**: Nome do repositório em que o projeto será versionado.
+- **user_app**: Responder 'y' se deseja adicionar a app de usuário customizada do Django.
 
-Criar ambiente virtual:
-```bash
-make setup_venv
-```
+## Como desenvolver
 
-Rodar seed do banco:
-```bash
-make seed
-```
+Por ser este um projeto Cookiecutter, o desenvolvimento é um pouco diferente do usual, já que o código-fonte do projeto na verdade é um template de código-fonte. Normalmente, o desenvolvimento segue da seguinte forma:
 
-## Arquitetura
+1. Clonar o código-fonte do projeto (se ainda não o fez).
+2. Na pasta do projeto clonado, gerar o código base localmente com o comando `cookiecutter .`
+    1. A escolha das configurações deve ser feita de acordo com o que se deseja desenvolver.
+3. Realizar as mudanças no projeto gerado (dentro da pasta _project-name_, se gerado com as configurações padrão).
+4. Quando finalizar as mudanças desejadas, refleti-las no projeto template e submetê-las para revisão*.
+    1. Antes de submeter as mudanças é importante testar o que foi feito, repetindo o passo 2 e rodando os testes no projeto gerado. 
 
-- `apps`: aqui devem estar todas as django apps locais que devem ser criadas ao longo do desenvolvimento do projeto. No projeto base esta pasta conterá apenas a app `user`. Para criar uma nova app, deve-se usar o comando *make startapp* na raiz do projeto para criá-la no lugar correto e seguindo o template do projeto base.
-- `conf`: módulo que contém arquivos de configuração do projeto.
-    - `app_template`: template usado para criação de novas apps. Geralmente, não deve ser alterado.
-    - `asgi.py`: arquivo asgi padrão do Django para deploy.
-    - `settings`: pasta com os arquivos settings do django. É modularizado de forma a possuir um arquivo de settings para cada ambiente: local, production, etc.
-    - `urls.py`: arquivo de urls do projeto. É preferível incluir apenas as urls das outras apps, deixando a configuração específica de cada módulo em seu próprio arquivo urls.py.
-    - `wsgi.py`: arquivo wsgi padrão do Django para deploy.
-- `requirements`: contém as dependências do projeto, separadas por ambiente (local, production, etc.).
-- `scripts`: contém shell scripts úteis para o projeto.
-- `env.example`: arquivo env de exemplo para iniciar o projeto. Deve ser copiado para um arquivo `.env` (não versionado).
-- `docker-compose.yml` e `Dockerfile`: arquivos de configuração Docker.
-- `Makefile`: contém comandos úteis, como por exemplo entrar num container ou criar uma app.
+Caso a mudança a ser feita seja muito pequena, o passo 3 pode ser pulado e o código pode ser modificado direto no template. Fica a critério do desenvolvedor decidir se é mais cômodo programar direto no template, mas precisando gerar sempre um novo projeto para testar o que foi feito; ou programar no projeto gerado, funcional e testável, mas que não será submetido, precisando portanto refletir as mudanças no template para serem submetidas.
 
-## Testes unitários
+## Como testar
 
 Utilizamos a biblioteca **pytest** para rodar testes unitários. Seu arquivo de configuração é *pytest.ini*.
 
-- Para rodas os testes, usar o comando `make test`.
+Para rodas os testes, é necessário ter o [pytest-cookies](https://pytest-cookies.readthedocs.io/en/latest/) instalado: `pip install requirements.txt` e depois simplesmente rodar `pytest`.
 
-Como por padrão os testes reutilizam o banco de dados gerado, caso tenha novas migrações é necessário re-criar o banco.
+Os testes do projeto consistem em simular a geração do projeto usando cookiecutter e testar o que foi criado.
 
-- Para re-criar o banco, usar o comando `make test_create_db`.
+**OBS:** O projeto gerado tem a sua própria suíte de testes. Esses testes não são rodados dentro do teste do *template cookiecutter*.
 
-## Comandos úteis
+## Deploy
 
-### Criar uma app
+Uma branch de *deploy* será mantida neste repositório para representar a versão gerada do template, com todas as opções default do cookiecutter. O intuito é testarmos a build, cobertura de código e deploy de um projeto genérico gerado a partir do base em sua configuração padrão.
 
-`make startapp [app_name]`
+Para atualizar a branch *deploy* com versão mais recente do template:
 
-### Entrar em um container
+```bash
+git checkout deploy
+cd ..
+cookiecutter -f git@github.com:rodrigo-capyba/django-base-capybaday.git --no-input
+cd django-base-capybaday
+```
 
-`make enter [service_name]`
-
-### Abrir o django shell
-
-`make shell`
+Dessa forma, se poderá ver no git o que foi modificado na nova versão do template e assim fazer um commit em *deploy* com as mudanças.

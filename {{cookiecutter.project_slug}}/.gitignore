@@ -98,13 +98,3 @@ db.sqlite3
 
 ### IDEs ###
 .vscode
-
-### Platforms ###
-# Divio
-.divio
-/data.tar.gz
-/data
-
-### Other ###
-django-base/
-project-name/

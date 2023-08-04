@@ -50,7 +50,9 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
+    {%- if cookiecutter.user_app|lower == 'y' %}
     'apps.user.config.UserConfig',
+    {%- endif %}
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -140,11 +142,13 @@ STATIC_ROOT = BASE_DIR.joinpath('staticfiles')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+{%- if cookiecutter.user_app|lower == 'y' %}
 
 
 # User
 
 AUTH_USER_MODEL = 'user.User'
+{%- endif %}
 
 
 # Sites

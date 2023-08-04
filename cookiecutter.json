@@ -1,0 +1,15 @@
+{
+    "project_name": "Django Base CapybaDay",
+    "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
+    "project_short_description": "Projeto Django base para apresentenção no Capyba Day 2023",
+    "repository_owner": "rodrigo-capyba",
+    "repository_name": "{{ cookiecutter.project_slug }}",
+    "site_name": "{{ cookiecutter.project_name }}",
+    "user_app": "y",
+    "_copy_without_render": [
+        "*.html",
+        "*.yml",
+        "*.py-tpl",
+        "*/templates/*"
+    ]
+}
