@@ -1,4 +1,4 @@
-# Django Base CapybaDay 23 [![build](https://github.com/rodrigo-capyba/django-base-capybaday/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/rodrigo-capyba/django-base-capybaday/actions/workflows/main.yml)
+# Django Base CapybaDay [![build](https://github.com/rodrigo-capyba/django-base-capybaday/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/rodrigo-capyba/django-base-capybaday/actions/workflows/main.yml)
 
 Projeto Django base para apresentenção no Capyba Day 2023
 
